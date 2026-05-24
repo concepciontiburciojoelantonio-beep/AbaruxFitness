@@ -14,6 +14,7 @@ import {
 } from "lucide-react"
 
 import { url } from "@/lib/url"
+import { Suspense } from "react"
 import { DashboardLayout } from "@/components/dashboard/dashboard-layout"
 import { TimePickerModal } from "@/components/ui/time-picker-modal"
 import { Button } from "@/components/ui/button"
@@ -69,7 +70,7 @@ type ObjetivoSesion = {
 
 
 
-export default function NuevaSesionPage() {
+function NuevaSesionContent() {
   const [recordatorio, setRecordatorio] = useState(true)
   const [permitirReagendar, setPermitirReagendar] = useState(true)
   const [notas, setNotas] = useState("")
@@ -968,5 +969,13 @@ useEffect(() => {
         </div>
       </div>
     </DashboardLayout>
+  )
+}
+
+export default function NuevaSesionPage() {
+  return (
+    <Suspense fallback={<div>Cargando...</div>}>
+      <NuevaSesionContent />
+    </Suspense>
   )
 }
